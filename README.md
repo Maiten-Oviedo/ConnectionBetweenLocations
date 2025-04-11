@@ -1,5 +1,5 @@
 # React Native App con Mapa y Búsqueda de Ubicación usando Redux
-![e3924d85-08b4-48f8-97d2-8113479464fc](https://github.com/user-attachments/assets/7a4e0b94-bcd2-49ea-bff8-794d3ae61747)
+<img src="https://github.com/user-attachments/assets/7a4e0b94-bcd2-49ea-bff8-794d3ae61747" alt="Mapa" width="400"/>
 
 Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú Mendoza") y mostrarla en un mapa utilizando [OpenStreetMap](https://www.openstreetmap.org/) con [Nominatim](https://nominatim.openstreetmap.org/). El estado de la ubicación se maneja globalmente con **Redux Toolkit**.
 
