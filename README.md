@@ -63,90 +63,6 @@ npx expo install react-native-maps
 
 ---
 
-## ⚙️ Configuración de Redux
-
-1. Crear `/src/store/locationSlice.ts`:
-
-```ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-type LocationState = {
-  latitude: number | null
-  longitude: number | null
-}
-
-const initialState: LocationState = {
-  latitude: null,
-  longitude: null,
-}
-
-const locationSlice = createSlice({
-  name: 'location',
-  initialState,
-  reducers: {
-    setLocation: (
-      state,
-      action: PayloadAction<{ latitude: number; longitude: number }>
-    ) => {
-      state.latitude = action.payload.latitude
-      state.longitude = action.payload.longitude
-    },
-  },
-})
-
-export const { setLocation } = locationSlice.actions
-export default locationSlice.reducer
-```
-
-2. Crear `/src/store/index.ts`:
-
-```ts
-import { configureStore } from '@reduxjs/toolkit'
-import locationReducer from './locationSlice'
-
-export const store = configureStore({
-  reducer: {
-    location: locationReducer,
-  },
-})
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-```
-
-3. Envolvé tu app en `App.tsx`:
-
-```tsx
-import { Provider } from 'react-redux'
-import { store } from './src/store'
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import Modal from './src/components/Modal/Modal'
-import Map from './src/components/MapView/Map'
-
-export default function App() {
-  return (
-    <Provider store={store}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <Map />
-          <Modal />
-          <StatusBar style="auto" />
-        </View>
-      </GestureHandlerRootView>
-    </Provider>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
-```
-
----
 
 ## 🧪 Cómo probar
 
@@ -204,6 +120,4 @@ const res = await fetch(
 
 ---
 
-## 📝 Licencia
-
-MIT
+## Gracias por leer.
