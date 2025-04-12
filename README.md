@@ -2,8 +2,7 @@
  ## Ecanea el siguiente Qr para usar la demo!
  ![image](https://github.com/user-attachments/assets/82a6c0e5-252f-4b21-a25c-8ebfdc56bc26)
  
- <img src="https://github.com/user-attachments/assets/7a4e0b94-bcd2-49ea-bff8-794d3ae61747" alt="Mapa" width="300"/>
- Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú Mendoza") y mostrarla en un mapa utilizando [GoogleMaps](https://github.com/react-native-maps/react-native-maps) con [Nominatim](https://nominatim.openstreetmap.org/). El estado de la ubicación se maneja globalmente con **Redux Toolkit**.
+Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú Mendoza") y mostrarla en un mapa utilizando [GoogleMaps](https://github.com/react-native-maps/react-native-maps) con [Nominatim](https://nominatim.openstreetmap.org/). El estado de la ubicación se maneja globalmente con **Redux Toolkit**.
  
  ---
  
