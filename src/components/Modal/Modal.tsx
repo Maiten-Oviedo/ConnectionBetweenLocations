@@ -18,7 +18,7 @@ const Modal = () => {
       backgroundStyle={{ borderRadius: 20 }}
     >
       <BottomSheetView style={styles.contentContainer}>
-        <Text style={styles.text}>Selecciona tu ubicación 🔽 </Text>
+        <Text style={styles.text}>Selecciona tu destino 🔽 </Text>
         <LocationsForm />
       </BottomSheetView>
     </BottomSheet>
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    marginBottom: 10,
   },
 })
 

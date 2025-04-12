@@ -1,7 +1,8 @@
 # React Native App con Mapa y Búsqueda de Ubicación usando Redux
+
 <img src="https://github.com/user-attachments/assets/7a4e0b94-bcd2-49ea-bff8-794d3ae61747" alt="Mapa" width="300"/>
 
-Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú Mendoza") y mostrarla en un mapa utilizando [OpenStreetMap](https://www.openstreetmap.org/) con [Nominatim](https://nominatim.openstreetmap.org/). El estado de la ubicación se maneja globalmente con **Redux Toolkit**.
+Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú Mendoza") y mostrarla en un mapa utilizando [GoogleMaps](https://github.com/react-native-maps/react-native-maps) con [Nominatim](https://nominatim.openstreetmap.org/). El estado de la ubicación se maneja globalmente con **Redux Toolkit**.
 
 ---
 
@@ -57,12 +58,12 @@ npm install @reduxjs/toolkit react-redux react-native-maps
 ```
 
 > Si usás Expo, también corré:
+
 ```bash
 npx expo install react-native-maps
 ```
 
 ---
-
 
 ## 🧪 Cómo probar
 

@@ -5,85 +5,110 @@ import {
   View,
   ActivityIndicator,
   TextInput,
+  StyleSheet,
+  TouchableOpacity,
 } from 'react-native'
-import { LocationType } from '../../types'
+import { ResponseType } from '../../types'
+import { useDispatch } from 'react-redux'
+import { setLocation } from '../../store/locationSlice'
 
 const LocationsForm = () => {
-  const [location, setLocation] = useState<LocationType | null>(null)
+  const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
-  const [reloadTrigger, setReloadTrigger] = useState(0)
   const [inputLocation, setInputLocation] = useState('')
 
-  useEffect(() => {
-    const getLocation = async () => {
-      try {
-        setIsLoading(true)
-        setError(null)
+  const handleLocationSearch = async (textLocation: String) => {
+    try {
+      setIsLoading(true)
 
-        // Aquí iría tu lógica para obtener la ubicación
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?q=${inputLocation}&format=json&limit=1`,
-          {
-            headers: {
-              'User-Agent': 'MyReactNativeApp (tucorreo@ejemplo.com)',
-            },
-          }
-        )
-        const data = await res.json()
-
-        if (data.length > 0) {
-          const result = data[0]
-          setLocation({
-            latitude: parseFloat(result.lat),
-            longitude: parseFloat(result.lon),
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
-          })
-        } else {
-          throw new Error('No se encontró la ubicación.')
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${textLocation}&format=json&limit=1`,
+        {
+          headers: {
+            'User-Agent': 'MyReactNativeApp (tucorreo@ejemplo.com)',
+          },
         }
-      } catch (err) {
-        setError(err as Error)
-      } finally {
-        setIsLoading(false)
+      )
+      //Aplicamos el nagative programming
+      if (!res.ok) {
+        throw new Error(`Request Error. Error: ${res.status}`)
       }
-    }
 
-    getLocation()
-  }, [reloadTrigger, inputLocation])
+      const arrayData = await res.json()
+      const data: ResponseType = arrayData[0]
+
+      if (data && data.lat && data.lon) {
+        const latitude = parseFloat(data.lat)
+        const longitude = parseFloat(data.lon)
+        if (isNaN(latitude) || isNaN(longitude)) {
+          throw new Error('Invalid coordinates received from API.')
+        }
+        dispatch(setLocation({ latitude, longitude }))
+      } else {
+        throw new Error('Not found the location.')
+      }
+    } catch (err) {
+      setError(err as Error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={styles.container}>
       <TextInput
+        style={styles.textinput}
         placeholder="Ingresa la ubicación"
         onChangeText={newText => setInputLocation(newText)}
         defaultValue={inputLocation}
       />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleLocationSearch(inputLocation)}
+      >
+        <Text style={styles.text}>Buscar</Text>
+      </TouchableOpacity>
       {isLoading && <ActivityIndicator />}
-      {location && (
-        <Text>
-          Lat: {location.latitude}, Lon: {location.longitude}
-        </Text>
-      )}
       {error && (
         <>
-          <Text style={{ color: 'red' }}>{error.message}</Text>
-          <Pressable
-            onPress={() => setReloadTrigger(prev => prev + 1)}
-            style={{
-              backgroundColor: '#444',
-              padding: 10,
-              marginTop: 10,
-              borderRadius: 6,
-            }}
-          >
-            <Text style={{ color: 'white' }}>Reintentar</Text>
-          </Pressable>
+          <Text style={styles.errorText}>{error.message}</Text>
         </>
       )}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+  },
+  textinput: {
+    width: 200,
+    fontSize: 18,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 8,
+    borderRadius: 10,
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#444',
+    padding: 10,
+    borderRadius: 10,
+  },
+  text: {
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
+  },
+  errorText: {
+    fontSize: 16,
+    color: 'red',
+  },
+})
 
 export default LocationsForm
