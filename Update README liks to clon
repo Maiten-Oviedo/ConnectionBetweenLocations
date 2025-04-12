@@ -41,8 +41,8 @@ Esta aplicación permite al usuario buscar una ubicación (por ejemplo, "Maipú 
 1. Cloná el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repo.git
-cd tu-repo
+git clone https://github.com/Maiten-Oviedo/ConnectionBetweenLocations.git
+cd ConnectionBetweenLocations
 ```
 
 2. Instalá las dependencias:
