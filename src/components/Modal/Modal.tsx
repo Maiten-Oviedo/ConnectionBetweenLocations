@@ -1,13 +1,12 @@
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet'
 import LocationsForm from '../LocationsForm/LocationsForm'
 
 const Modal = () => {
   const bottomSheetRef = useRef<BottomSheet>(null)
 
-  const snapPoints = useMemo(() => ['8%', '20%'], []) // Solo 20% de altura
+  const snapPoints = useMemo(() => ['8%', '20%'], [])
 
   return (
     <BottomSheet
@@ -16,6 +15,7 @@ const Modal = () => {
       snapPoints={snapPoints}
       enablePanDownToClose={false}
       backgroundStyle={{ borderRadius: 20 }}
+      keyboardBehavior="interactive"
     >
       <BottomSheetView style={styles.contentContainer}>
         <Text style={styles.text}>Selecciona tu destino 🔽 </Text>
