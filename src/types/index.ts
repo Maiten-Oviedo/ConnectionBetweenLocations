@@ -10,6 +10,7 @@ export type LocationType = {
 export type ResponseType = {
   lat: string
   lon: string
+  display_name: string
 }
 
 // Tipos útiles para usar nuestro redux
